@@ -1,0 +1,91 @@
+{
+  "common": {
+    "language": {
+      "en": "English",
+      "ar": "العربية"
+    }
+  },
+  "header": {
+    "callUs": "اتصل بنا: +1 800 123 456 789 - راسلنا: Itcroc@mail.com",
+    "address": "684 شارع ويست كوليدج، صن سيتي، الولايات المتحدة",
+    "login": "تسجيل الدخول",
+    "account": {
+      "myAccount": "حسابي",
+      "createAccount": "إنشاء حساب"
+    },
+    "searchCourse": "ابحث عن دورة",
+    "nav": {
+      "demos": "العروض",
+      "pages": "الصفحات",
+      "courses": "الدورات",
+      "dashboard": "لوحة التحكم",
+      "ecommerce": "المتجر",
+      "home": "الرئيسية",
+      "about": "من نحن",
+      "blog": "المدونة",
+      "contact": "تواصل معنا"
+    },
+    "cta": {
+      "start": "ابدأ الآن",
+      "startHere": "ابدأ من هنا",
+      "startFree": "ابدأ مجانًا"
+    }
+  },
+  "mobile": {
+    "searchPlaceholder": "ابحث في المتجر بالكامل..."
+  },
+  "footer": {
+    "about": {
+      "title": "من نحن",
+      "description": "يعتمد العملاء من الشركات والمسافرون بغرض الترفيه على Groundlink لخدمة سيارات موثوقة وآمنة واحترافية في المدن الكبرى حول العالم.",
+      "hoursTitle": "ساعات العمل",
+      "hoursDays": "الاثنين - السبت (8:00 - 6:00)",
+      "hoursSunday": "الأحد - مغلق"
+    },
+    "links": {
+      "useful": {
+        "heading": "روابط مفيدة",
+        "items": {
+          "about": "من نحن",
+          "teachers": "المدرّسون",
+          "partner": "الشركاء",
+          "roomDetails": "تفاصيل القاعة",
+          "gallery": "المعرض"
+        }
+      },
+      "course": {
+        "heading": "الدورات",
+        "items": {
+          "uiux": "تصميم UI/UX",
+          "webDev": "تطوير الويب",
+          "businessStrategy": "استراتيجية الأعمال",
+          "softwareDev": "تطوير البرمجيات",
+          "businessEnglish": "الإنجليزية للأعمال"
+        }
+      }
+    },
+    "top": {
+      "headline": "هل ما زلت بحاجة إلى",
+      "highlight": "دعمنا",
+      "questionMark": "؟",
+      "subhead": "لا تنتظر، احصل على عرض منطقي وذكي هنا. الأمر بسيط.",
+      "emailPlaceholder": "أدخل بريدك الإلكتروني هنا",
+      "subscribe": "اشترك الآن"
+    },
+    "recent": {
+      "title": "آخر المقالات",
+      "posts": {
+        "one": "أفضل أعمالك",
+        "two": "حافظ على أعمالك",
+        "three": "طوّر أعمالك"
+      }
+    },
+    "copyright": {
+      "poweredBy": "مدعوم بواسطة",
+      "rights": "جميع الحقوق محفوظة.",
+      "main": "حقوق النشر © 2024 بواسطة edurock. جميع الحقوق محفوظة.",
+      "terms": "شروط الاستخدام",
+      "privacy": "سياسة الخصوصية"
+    }
+  }
+}

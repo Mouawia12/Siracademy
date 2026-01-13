@@ -1,0 +1,91 @@
+{
+  "common": {
+    "language": {
+      "en": "English",
+      "ar": "Arabic"
+    }
+  },
+  "header": {
+    "callUs": "Call Us: +1 800 123 456 789 - Mail Us: Itcroc@mail.com",
+    "address": "684 West College St. Sun City, USA",
+    "login": "Login",
+    "account": {
+      "myAccount": "My Account",
+      "createAccount": "Create Account"
+    },
+    "searchCourse": "Search Course",
+    "nav": {
+      "demos": "Demos",
+      "pages": "Pages",
+      "courses": "Courses",
+      "dashboard": "Dashboard",
+      "ecommerce": "eCommerce",
+      "home": "Home",
+      "about": "About",
+      "blog": "Blog",
+      "contact": "Contact"
+    },
+    "cta": {
+      "start": "Get Start",
+      "startHere": "Get Start Here",
+      "startFree": "Get Started Free"
+    }
+  },
+  "mobile": {
+    "searchPlaceholder": "Search entire store..."
+  },
+  "footer": {
+    "about": {
+      "title": "About us",
+      "description": "Corporate clients and leisure travelers has been relying on Groundlink for dependable safe, and professional chauffeured car end service in major cities across World.",
+      "hoursTitle": "OPENING HOURS",
+      "hoursDays": "Mon - Sat (8.00 - 6.00)",
+      "hoursSunday": "Sunday - Closed"
+    },
+    "links": {
+      "useful": {
+        "heading": "Useful Links",
+        "items": {
+          "about": "About Us",
+          "teachers": "Teachers",
+          "partner": "Partner",
+          "roomDetails": "Room Details",
+          "gallery": "Gallery"
+        }
+      },
+      "course": {
+        "heading": "Course",
+        "items": {
+          "uiux": "UI/UX Design",
+          "webDev": "Web Development",
+          "businessStrategy": "Business Strategy",
+          "softwareDev": "Software Development",
+          "businessEnglish": "Business English"
+        }
+      }
+    },
+    "top": {
+      "headline": "Still You Need Our",
+      "highlight": "Support",
+      "questionMark": "?",
+      "subhead": "Don't wait make a smart & logical quote here. Its pretty easy.",
+      "emailPlaceholder": "Enter your email here",
+      "subscribe": "Subscribe Now"
+    },
+    "recent": {
+      "title": "Recent Post",
+      "posts": {
+        "one": "Best Your Business",
+        "two": "Keep Your Business",
+        "three": "Nice Your Business"
+      }
+    },
+    "copyright": {
+      "poweredBy": "Powered by",
+      "rights": "All Rights Reserved.",
+      "main": "Copyright © 2024 by edurock. All Rights Reserved.",
+      "terms": "Terms of Use",
+      "privacy": "Privacy Policy"
+    }
+  }
+}
