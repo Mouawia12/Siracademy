@@ -4,8 +4,9 @@ import ThemeController from "@/components/shared/others/ThemeController";
 import PageWrapper from "@/components/shared/wrappers/PageWrapper";
 
 export const metadata = {
-  title: "Home 2 | Edurock - Education LMS Template",
-  description: "Home 2 | Edurock - Education LMS Template",
+  title: "Home | Sir Academy",
+  description:
+    "Leadership and professional development programs built for emerging and established leaders.",
 };
 
 const Home_2 = async () => {

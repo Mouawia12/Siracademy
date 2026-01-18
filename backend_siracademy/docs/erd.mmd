@@ -1,0 +1,41 @@
+erDiagram
+    USERS ||--o{ ENROLLMENTS : enrolls
+    USERS ||--o{ COURSE_INSTRUCTORS : teaches
+    USERS ||--o{ REVIEWS : writes
+    USERS ||--o{ ORDERS : places
+    USERS ||--o{ MESSAGES : sends
+    USERS ||--o{ USER_PROFILES : has
+    USERS ||--o{ USER_SETTINGS : has
+    USERS ||--o{ USER_SOCIAL_LINKS : has
+
+    COURSES ||--o{ COURSE_SECTIONS : has
+    COURSES ||--o{ LESSONS : has
+    COURSES ||--o{ ENROLLMENTS : has
+    COURSES ||--o{ QUIZZES : has
+    COURSES ||--o{ ASSIGNMENTS : has
+    COURSES ||--o{ ANNOUNCEMENTS : has
+    COURSES ||--o{ CERTIFICATE_ISSUES : awards
+
+    COURSE_SECTIONS ||--o{ LESSONS : contains
+    LESSONS ||--o{ LESSON_RESOURCES : has
+    LESSONS ||--o{ QUIZZES : contains
+
+    QUIZZES ||--o{ QUIZ_QUESTIONS : includes
+    QUIZ_QUESTIONS ||--o{ QUIZ_OPTIONS : has
+    QUIZZES ||--o{ QUIZ_ATTEMPTS : attempts
+    QUIZ_ATTEMPTS ||--o{ QUIZ_ANSWERS : answers
+
+    ASSIGNMENTS ||--o{ ASSIGNMENT_SUBMISSIONS : submits
+
+    ORDERS ||--o{ ORDER_ITEMS : includes
+    ORDERS ||--o{ PAYMENTS : pays
+    PAYMENTS ||--o{ TRANSACTIONS : logs
+
+    PRODUCTS ||--o{ PRODUCT_IMAGES : images
+    POSTS ||--o{ COMMENTS : has
+    EVENTS ||--o{ CATEGORIZABLES : categorized
+    TAGS ||--o{ TAGGABLES : tagged
+    CATEGORIES ||--o{ CATEGORIZABLES : categorized
+    POSTS ||--o{ TAGGABLES : tagged
+    COURSES ||--o{ TAGGABLES : tagged
+    PRODUCTS ||--o{ TAGGABLES : tagged

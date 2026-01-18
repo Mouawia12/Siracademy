@@ -52,29 +52,29 @@ const Hero2 = () => {
           <div className="grid grid-cols-1 lg:grid-cols-12 items-center gap-12 md:gap-15 lg:gap-30px">
             {/* banner Left */}
             <div className="lg:col-start-1 lg:col-span-7" data-aos="fade-up">
-              <SectionName>Education</SectionName>
+              <SectionName>Leadership Academy</SectionName>
               <HeadingLg>
-                Cloud-based LMS <br className="hidden lg:block" />
-                Trusted by 1000+
+                Leadership &amp; Professional <br className="hidden lg:block" />
+                Development for Impact
               </HeadingLg>
               <p className="text-size-15 lg:text-base 2xl:text-lg text-contentColor mb-5 2xl:mb-30px dark:text-contentColor-dark">
-                Lorem Ipsum is simply dummy text of the printing
+                Executive coaching, accredited qualifications, and practical
                 <br className="hidden 2xl:block" />
-                typesetting industry. Lorem Ipsum has been
+                leadership training built for modern professionals.
               </p>
 
               <div>
                 <form className="flex gap-x-15px items-center flex-wrap gap-y-5">
                   <input
                     type="email"
-                    placeholder="Your email address"
+                    placeholder="Work email address"
                     className="basis-[311px] h-14 leading-14 pl-3 border border-contentColor text-blackColor focus:outline-none rounded"
                   />
                   <button
                     type="submit"
                     className="text-size-15 text-whiteColor bg-primaryColor px-39px py-14px border border-primaryColor hover:text-primaryColor hover:bg-whiteColor inline-block rounded group dark:hover:text-whiteColor dark:hover:bg-whiteColor-dark"
                   >
-                    Sign Up
+                    Request Info
                   </button>
                 </form>
               </div>
@@ -121,10 +121,10 @@ const Hero2 = () => {
                     </div>
                     <div>
                       <p className="text-size-15 font-semibold text-greencolor3">
-                        Congratulations!!
+                        Welcome aboard!
                       </p>
                       <p className="text-sm text-contentColor dark:text-contentColor-dark">
-                        Your Admission Completed
+                        Your enrollment is confirmed
                       </p>
                     </div>
                   </div>
@@ -161,7 +161,7 @@ const Hero2 = () => {
                         <span className="text-blackColor dark:text-blackColor-dark">
                           4000+
                         </span>
-                        students
+                        professionals
                       </p>
                     </div>
                   </div>

@@ -1,31 +1,14 @@
 "use client";
-import useIsTrue from "@/hooks/useIsTrue";
 import useTranslations from "@/hooks/useTranslations";
 import React from "react";
-import LanguageSwitcher from "@/components/shared/others/LanguageSwitcher";
 
 const HeaderTop = () => {
   const { t } = useTranslations();
-  const isHome1 = useIsTrue("/");
-  const isHome1Dark = useIsTrue("/home-1-dark");
-  const isHome4 = useIsTrue("/home-4");
-  const isHome4Dark = useIsTrue("/home-4-dark");
-  const isHome5 = useIsTrue("/home-5");
-  const isHome5Dark = useIsTrue("/home-5-dark");
 
   return (
     <div className="bg-blackColor2 dark:bg-lightGrey10-dark hidden lg:block">
       <div
-        className={`${
-          isHome1 ||
-          isHome1Dark ||
-          isHome4 ||
-          isHome4Dark ||
-          isHome5 ||
-          isHome5Dark
-            ? "lg:container 3xl:container2-lg"
-            : "container 3xl:container-secondary-lg "
-          } 4xl:container mx-auto text-whiteColor text-size-12 xl:text-sm py-5px xl:py-9px`}
+        className="container sm:container-fluid lg:container 3xl:container-secondary 4xl:container mx-auto text-whiteColor text-size-12 xl:text-sm py-5px xl:py-9px"
       >
         <div className="flex justify-between items-center">
           <div>
@@ -75,7 +58,6 @@ const HeaderTop = () => {
                 </li>
               </ul>
             </div>
-            <LanguageSwitcher />
           </div>
         </div>
       </div>

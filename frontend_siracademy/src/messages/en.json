@@ -11,24 +11,26 @@
     "login": "Login",
     "account": {
       "myAccount": "My Account",
-      "createAccount": "Create Account"
+      "createAccount": "Create Account",
+      "logout": "Logout"
     },
     "searchCourse": "Search Course",
     "nav": {
-      "demos": "Demos",
-      "pages": "Pages",
-      "courses": "Courses",
-      "dashboard": "Dashboard",
-      "ecommerce": "eCommerce",
       "home": "Home",
-      "about": "About",
-      "blog": "Blog",
-      "contact": "Contact"
+      "about": "About the Academy",
+      "programs": "Programs",
+      "instructors": "Instructors",
+      "leadership": "Leadership Training",
+      "insights": "Insights",
+      "contact": "Contact",
+      "loginRegister": "Login / Register",
+      "dashboard": "Dashboard"
     },
     "cta": {
       "start": "Get Start",
       "startHere": "Get Start Here",
-      "startFree": "Get Started Free"
+      "startFree": "Get Started Free",
+      "apply": "Request Info"
     }
   },
   "mobile": {

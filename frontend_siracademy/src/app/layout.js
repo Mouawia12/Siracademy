@@ -10,6 +10,7 @@ import "swiper/css/effect-cards";
 import "./globals.css";
 import FixedShadow from "@/components/shared/others/FixedShadow";
 import PreloaderPrimary from "@/components/shared/others/PreloaderPrimary";
+import AppProviders from "@/components/shared/providers/AppProviders";
 import { cookies, headers } from "next/headers";
 import { LocaleProvider } from "@/contexts/LocaleContext";
 import { getLocale } from "@/libs/i18n";
@@ -34,8 +35,9 @@ export const cairo = Cairo({
 });
 
 export const metadata = {
-  title: "Home 1 | Edurock - Education LMS Template",
-  description: "Home description",
+  title: "Sir Academy | Leadership & Professional Development",
+  description:
+    "Sir Academy is a leadership and professional development academy offering programs, coaching, and qualifications for emerging leaders.",
 };
 
 export default function RootLayout({ children }) {
@@ -56,14 +58,16 @@ export default function RootLayout({ children }) {
         }`}
       >
         <LocaleProvider locale={locale}>
-          <PreloaderPrimary />
-          {children}
+          <AppProviders>
+            <PreloaderPrimary />
+            {children}
 
-          {/* theme fixed shadow */}
-          <div>
-            <FixedShadow />
-            <FixedShadow align={"right"} />
-          </div>
+            {/* theme fixed shadow */}
+            <div>
+              <FixedShadow />
+              <FixedShadow align={"right"} />
+            </div>
+          </AppProviders>
         </LocaleProvider>
       </body>
     </html>

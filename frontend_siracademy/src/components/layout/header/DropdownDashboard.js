@@ -34,6 +34,12 @@ const DropdownDashboard = () => {
           type: "secondary",
         },
         {
+          name: "Lessons",
+          status: null,
+          path: "/dashboards/admin-lessons",
+          type: "secondary",
+        },
+        {
           name: "Review",
           status: null,
           path: "/dashboards/admin-reviews",
@@ -105,6 +111,12 @@ const DropdownDashboard = () => {
           name: "My Courses",
           status: null,
           path: "/dashboards/instructor-course",
+          type: "secondary",
+        },
+        {
+          name: "My Lessons",
+          status: null,
+          path: "/dashboards/instructor-lessons",
           type: "secondary",
         },
         {

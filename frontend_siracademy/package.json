@@ -9,15 +9,29 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@hookform/resolvers": "^5.2.2",
+    "@tanstack/react-table": "^8.21.3",
     "aos": "^3.0.0-beta.6",
+    "axios": "^1.13.2",
     "chart.js": "^4.4.2",
+    "clsx": "^2.1.1",
+    "dayjs": "^1.11.19",
     "isotope-layout": "^3.0.6",
+    "jwt-decode": "^4.0.0",
     "next": "14.2.3",
     "react": "^18",
     "react-dom": "^18",
+    "react-dropzone": "^14.3.8",
+    "react-helmet-async": "^2.0.5",
+    "react-hook-form": "^7.71.1",
+    "react-hot-toast": "^2.6.0",
+    "react-icons": "^5.5.0",
+    "react-router-dom": "^7.12.0",
     "sweetalert2": "^11.11.0",
     "swiper": "^11.1.1",
-    "vanilla-tilt": "^1.8.1"
+    "vanilla-tilt": "^1.8.1",
+    "zod": "^4.3.5",
+    "zustand": "^5.0.10"
   },
   "devDependencies": {
     "eslint": "^8",

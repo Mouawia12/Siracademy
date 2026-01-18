@@ -1,13 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
-import getAllCourses from "@/libs/getAllCourses";
 import getAllInstructors from "@/libs/getAllInstructors";
 
-const InstructorContent = ({ id }) => {
-  const { image, desig } = getAllInstructors()?.find(
-    ({ id: idx }) => idx === id
-  );
-  const { insName } = getAllCourses()?.find(({ id: idx }) => idx === id);
+const InstructorContent = ({ instructor }) => {
+  const fallback = getAllInstructors()?.[0] || {};
+  const image = fallback?.image;
+  const name = instructor?.name || "Sir Academy Instructor";
 
   return (
     <div>
@@ -29,10 +27,10 @@ const InstructorContent = ({ id }) => {
           <div className="mb-3">
             <h3 className="mb-7px">
               <Link
-                href={`/instructors/${id}`}
+                href={`/instructors/${instructor?.id || 1}`}
                 className="text-xl font-bold text-blackColor2 dark:text-blackColor2-dark hover:text-primaryColor dark:hover:text-primaryColor"
               >
-                {insName ? insName : "Rosalina D. Willaim"}
+                {name}
               </Link>
             </h3>
             <p className="text-xs text-contentColor2 dark:text-contentColor2-dark">

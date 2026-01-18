@@ -3,8 +3,9 @@ import ThemeController from "@/components/shared/others/ThemeController";
 import PageWrapper from "@/components/shared/wrappers/PageWrapper";
 
 export const metadata = {
-  title: "Instructor | Edurock - Education LMS Template",
-  description: "Instructor | Edurock - Education LMS Template",
+  title: "Faculty & Coaches | Sir Academy",
+  description:
+    "Meet our leadership faculty, mentors, and executive coaches.",
 };
 const Instructors = () => {
   return (

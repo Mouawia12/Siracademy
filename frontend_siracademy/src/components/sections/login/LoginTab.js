@@ -9,9 +9,13 @@ import shapImage3 from "@/assets/images/education/hero_shape3.png";
 import shapImage4 from "@/assets/images/education/hero_shape4.png";
 import shapImage5 from "@/assets/images/education/hero_shape5.png";
 import useTab from "@/hooks/useTab";
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { AUTH_EVENT, getDashboardPath, getStoredUser, isLoggedIn } from "@/libs/auth";
 
 const LoginTab = () => {
   const { currentIdx, handleTabClick } = useTab();
+  const router = useRouter();
   const tabButtons = [
     { name: "Login", content: <LoginForm /> },
     {
@@ -19,6 +23,17 @@ const LoginTab = () => {
       content: <SignUpForm />,
     },
   ];
+  useEffect(() => {
+    const handleAuth = () => {
+      if (isLoggedIn()) {
+        router.replace(getDashboardPath(getStoredUser()));
+      }
+    };
+
+    handleAuth();
+    window.addEventListener(AUTH_EVENT, handleAuth);
+    return () => window.removeEventListener(AUTH_EVENT, handleAuth);
+  }, [router]);
   return (
     <section className="relative">
       <div className="container py-100px">

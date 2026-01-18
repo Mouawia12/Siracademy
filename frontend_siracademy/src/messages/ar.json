@@ -11,24 +11,26 @@
     "login": "تسجيل الدخول",
     "account": {
       "myAccount": "حسابي",
-      "createAccount": "إنشاء حساب"
+      "createAccount": "إنشاء حساب",
+      "logout": "تسجيل الخروج"
     },
     "searchCourse": "ابحث عن دورة",
     "nav": {
-      "demos": "العروض",
-      "pages": "الصفحات",
-      "courses": "الدورات",
-      "dashboard": "لوحة التحكم",
-      "ecommerce": "المتجر",
       "home": "الرئيسية",
-      "about": "من نحن",
-      "blog": "المدونة",
-      "contact": "تواصل معنا"
+      "about": "عن الأكاديمية",
+      "programs": "البرامج",
+      "instructors": "المدرّبون",
+      "leadership": "تدريب القيادة",
+      "insights": "الرؤى والمقالات",
+      "contact": "تواصل معنا",
+      "loginRegister": "تسجيل الدخول / إنشاء حساب",
+      "dashboard": "لوحة التحكم"
     },
     "cta": {
       "start": "ابدأ الآن",
       "startHere": "ابدأ من هنا",
-      "startFree": "ابدأ مجانًا"
+      "startFree": "ابدأ مجانًا",
+      "apply": "اطلب معلومات"
     }
   },
   "mobile": {

@@ -6,99 +6,48 @@ import CoursesList from "@/components/shared/courses/CoursesList";
 import Pagination from "@/components/shared/others/Pagination";
 import TabContentWrapper from "@/components/shared/wrappers/TabContentWrapper";
 import useTab from "@/hooks/useTab";
-import { useEffect, useRef, useState } from "react";
-import getAllCourses from "@/libs/getAllCourses";
+import { useEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import NoData from "@/components/shared/others/NoData";
+import { apiClient } from "@/libs/api";
+import gridImage1 from "@/assets/images/grid/grid_1.png";
+import gridImage2 from "@/assets/images/grid/grid_2.png";
+import gridImage3 from "@/assets/images/grid/grid_3.png";
+import gridImage4 from "@/assets/images/grid/grid_4.png";
+import gridImage5 from "@/assets/images/grid/grid_5.png";
+import gridImage6 from "@/assets/images/grid/grid_6.png";
+import gridImage7 from "@/assets/images/grid/grid_7.png";
+import gridImage8 from "@/assets/images/grid/grid_8.png";
+import gridImage9 from "@/assets/images/grid/grid_9.png";
+import gridSmallImg1 from "@/assets/images/grid/grid_small_1.jpg";
+import gridSmallImg2 from "@/assets/images/grid/grid_small_2.jpg";
+import gridSmallImg3 from "@/assets/images/grid/grid_small_3.jpg";
+import gridSmallImg4 from "@/assets/images/grid/grid_small_4.jpg";
+import gridSmallImg5 from "@/assets/images/grid/grid_small_5.jpg";
 const sortInputs = [
   "Sort by New",
   "Title Ascending",
   "Title Descending",
-  "Price Ascending",
-  "Price Descending",
 ];
-const coursesBeforeFilter = getAllCourses();
-const getFilteredCoursesLength = (filterkey, filterValue) => {
-  const filteredCoursesLength = coursesBeforeFilter?.filter(
-    (course) => course[filterkey] === filterValue
-  )?.length;
-  return filteredCoursesLength;
-};
-const filterIputs = [
-  {
-    name: "Categories",
-    inputs: [
-      {
-        name: "Art & Design",
-        totalCount: getFilteredCoursesLength("categories", "Art & Design"),
-      },
-      {
-        name: "Development",
-        totalCount: getFilteredCoursesLength("categories", "Development"),
-      },
-      {
-        name: "Lifestyle",
-        totalCount: getFilteredCoursesLength("categories", "Lifestyle"),
-      },
-      {
-        name: "Web Design",
-        totalCount: getFilteredCoursesLength("categories", "Web Design"),
-      },
-      {
-        name: "Business",
-        totalCount: getFilteredCoursesLength("categories", "Business"),
-      },
-      {
-        name: "Finance",
-        totalCount: getFilteredCoursesLength("categories", "Finance"),
-      },
-      {
-        name: "Personal Development",
-        totalCount: getFilteredCoursesLength(
-          "categories",
-          "Personal Development"
-        ),
-      },
-      {
-        name: "Marketing",
-        totalCount: getFilteredCoursesLength("categories", "Marketing"),
-      },
-      {
-        name: "Photography",
-        totalCount: getFilteredCoursesLength("categories", "Photography"),
-      },
-      {
-        name: "Data Science",
-        totalCount: getFilteredCoursesLength("categories", "Data Science"),
-      },
-      {
-        name: "Health & Fitness",
-        totalCount: getFilteredCoursesLength("categories", "Health & Fitness"),
-      },
-      {
-        name: "Mobile Application",
-        totalCount: getFilteredCoursesLength(
-          "categories",
-          "Mobile Application"
-        ),
-      },
-    ],
-  },
-  {
-    name: "Tag",
-    inputs: [
-      "Mechanic",
-      "English",
-      "Computer Science",
-      "Data & Tech",
-      "Ux Desgin",
-    ],
-  },
-  {
-    name: "Skill Level",
-    inputs: ["All", "Fullstack", "English Learn", "Intermediate", "Wordpress"],
-  },
+const courseImages = [
+  gridImage1,
+  gridImage2,
+  gridImage3,
+  gridImage4,
+  gridImage5,
+  gridImage6,
+  gridImage7,
+  gridImage8,
+  gridImage9,
+];
+
+const instructorImages = [
+  gridSmallImg1,
+  gridSmallImg2,
+  gridSmallImg3,
+  gridSmallImg4,
+  gridSmallImg5,
 ];
 // get all filtered courses
 const getAllFilteredCourses = (filterableCourses, filterObject) => {
@@ -122,14 +71,11 @@ const getSortedCourses = (courses, sortInput) => {
       return courses?.sort((a, b) => a?.title?.localeCompare(b?.title));
     case "Title Descending":
       return courses?.sort((a, b) => b?.title?.localeCompare(a?.title));
-    case "Price Ascending":
-      return courses?.sort((a, b) => a?.price - b?.price);
-    case "Price Descending":
-      return courses?.sort((a, b) => b?.price - a?.price);
   }
 };
 const CoursesPrimary = ({ isNotSidebar, isList, card }) => {
   const category = useSearchParams().get("category");
+  const [coursesBeforeFilter, setCoursesBeforeFilter] = useState([]);
   const [currentCategories, setCurrentCategories] = useState([]);
   const [currentTags, setCurrentTags] = useState([]);
   const [currentSkillLevel, setCurrentSkillLevel] = useState([]);
@@ -149,10 +95,46 @@ const CoursesPrimary = ({ isNotSidebar, isList, card }) => {
     currentTags,
     currentSkillLevel,
   };
+  const filterInputs = useMemo(() => {
+    const categoryCounts = coursesBeforeFilter.reduce((acc, course) => {
+      const name = course.categories;
+      if (!name) return acc;
+      acc[name] = (acc[name] || 0) + 1;
+      return acc;
+    }, {});
+
+    const tags = new Set();
+    const skillLevels = new Set();
+
+    coursesBeforeFilter.forEach((course) => {
+      if (course.tag) tags.add(course.tag);
+      if (course.skillLevel) skillLevels.add(course.skillLevel);
+    });
+
+    return [
+      {
+        name: "Categories",
+        inputs: Object.entries(categoryCounts).map(([name, totalCount]) => ({
+          name,
+          totalCount,
+        })),
+      },
+      {
+        name: "Tag",
+        inputs: Array.from(tags),
+      },
+      {
+        name: "Skill Level",
+        inputs: ["All", ...Array.from(skillLevels)],
+      },
+    ];
+  }, [coursesBeforeFilter]);
+
   const coursesOnCategory = coursesBeforeFilter?.filter(({ categories }) =>
-    categories.toLocaleLowerCase()?.includes(category?.split("_")?.join(" "))
+    (categories || "")
+      .toLocaleLowerCase()
+      ?.includes(category?.split("_")?.join(" "))
   );
-  console.log(category);
   const allFilteredCourses = category
     ? getAllFilteredCourses(coursesOnCategory, filterObject)
     : getAllFilteredCourses(coursesBeforeFilter, filterObject);
@@ -162,7 +144,7 @@ const CoursesPrimary = ({ isNotSidebar, isList, card }) => {
         isSearch ? searchCourses : allFilteredCourses,
         sortInput
       );
-  const coursesString = JSON.stringify(courses);
+  const coursesString = JSON.stringify(courses || []);
   const totalCourses = courses?.length;
   const limit = 12;
   const totalPages = Math.ceil(totalCourses / limit);
@@ -200,6 +182,47 @@ const CoursesPrimary = ({ isNotSidebar, isList, card }) => {
       ),
     },
   ];
+
+  useEffect(() => {
+    const fetchCourses = async () => {
+      try {
+        const response = await apiClient.get("/v1/courses", {
+          params: {
+            paginate: false,
+            status: "published",
+          },
+        });
+        const data = response?.data?.data || [];
+        const mapped = data.map((course, idx) => {
+          const categoryName = course?.categories?.[0]?.name || "Leadership";
+          const levelName = course?.level?.name || "All";
+          const lessonCount = course?.lessons_count ?? course?.total_lessons ?? 0;
+          const durationMinutes = course?.total_duration_minutes ?? 0;
+          const publishedDate = course?.published_at || course?.created_at;
+
+          return {
+            id: course.id,
+            title: course.title,
+            lesson: `${lessonCount} Lessons`,
+            duration: durationMinutes ? `${durationMinutes} min` : "Self paced",
+            image: courseImages[idx % courseImages.length],
+            insName: course?.primary_instructor?.name || "Sir Academy",
+            insImg: instructorImages[idx % instructorImages.length],
+            categories: categoryName,
+            tag: course?.tags?.[0]?.name || "",
+            skillLevel: levelName,
+            date: publishedDate ? new Date(publishedDate).getTime() : 0,
+          };
+        });
+        setCoursesBeforeFilter(mapped);
+      } catch (error) {
+        setCoursesBeforeFilter([]);
+      }
+    };
+
+    fetchCourses();
+  }, []);
+
   useEffect(() => {
     const courses = JSON.parse(coursesString);
 
@@ -362,7 +385,7 @@ const CoursesPrimary = ({ isNotSidebar, isList, card }) => {
                       >
                         {[...searchCourses]
                           ?.slice(0, 5)
-                          .map(({ id, title, image, price }, idx) => (
+                          .map(({ id, title, image }, idx) => (
                             <li
                               key={idx}
                               className="relative flex gap-x-1.5 items-center"
@@ -387,7 +410,7 @@ const CoursesPrimary = ({ isNotSidebar, isList, card }) => {
                                 </Link>
                                 <p className="text-size-10 text-darkblack leading-5 block pb-5px dark:text-darkblack-dark">
                                   <span className="text-secondaryColor">
-                                    ${price.toFixed(2)}
+                                    Included with membership
                                   </span>
                                 </p>
                               </div>
@@ -400,7 +423,7 @@ const CoursesPrimary = ({ isNotSidebar, isList, card }) => {
                   </form>
                 </div>
                 {/* categories  */}
-                {filterIputs?.map(({ name, inputs }, idx) => (
+                {filterInputs?.map(({ name, inputs }, idx) => (
                   <div
                     key={idx}
                     className="pt-30px pr-15px pl-10px pb-23px 2xl:pt-10 2xl:pr-25px 2xl:pl-5 2xl:pb-33px mb-30px border border-borderColor dark:border-borderColor-dark"

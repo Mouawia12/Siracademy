@@ -1,13 +1,35 @@
 "use client";
 
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import ItemsDashboard from "./ItemsDashboard";
+import { clearAuth } from "@/libs/auth";
+import useAuthStore from "@/store/useAuthStore";
 
 const SidebarDashboard = () => {
   const pathname = usePathname();
+  const router = useRouter();
   const partOfPathNaem = pathname.split("/")[2].split("-")[0];
   const isAdmin = partOfPathNaem === "admin" ? true : false;
   const isInstructor = partOfPathNaem === "instructor" ? true : false;
+  const apiBase = process.env.NEXT_PUBLIC_API_URL || "http://127.0.0.1:8000";
+  const apiPrefix = process.env.NEXT_PUBLIC_API_PREFIX || "/api";
+  const clearAuthStore = useAuthStore((state) => state.clearAuth);
+
+  const handleLogout = async () => {
+    const token = localStorage.getItem("auth_token");
+    try {
+      if (token) {
+        await fetch(`${apiBase}${apiPrefix}/v1/auth/logout`, {
+          method: "POST",
+          headers: { Authorization: `Bearer ${token}` },
+        });
+      }
+    } finally {
+      clearAuth();
+      clearAuthStore();
+      router.push("/login");
+    }
+  };
   const adminItems = [
     {
       title: " WELCOME, MICLE OBEMA",
@@ -97,6 +119,28 @@ const SidebarDashboard = () => {
           ),
         },
         {
+          name: "Lessons",
+          path: "/dashboards/admin-lessons",
+          icon: (
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="feather feather-layers"
+            >
+              <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+              <polyline points="2 17 12 22 22 17"></polyline>
+              <polyline points="2 12 12 17 22 12"></polyline>
+            </svg>
+          ),
+        },
+        {
           name: "Reviews",
           path: "/dashboards/admin-reviews",
           icon: (
@@ -167,6 +211,7 @@ const SidebarDashboard = () => {
         {
           name: "Logout",
           path: "#",
+          onClick: handleLogout,
           icon: (
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -368,6 +413,28 @@ const SidebarDashboard = () => {
           ),
         },
         {
+          name: "My Lessons",
+          path: "/dashboards/instructor-lessons",
+          icon: (
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="feather feather-layers"
+            >
+              <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+              <polyline points="2 17 12 22 22 17"></polyline>
+              <polyline points="2 12 12 17 22 12"></polyline>
+            </svg>
+          ),
+        },
+        {
           name: "Announcments",
           path: "/dashboards/instructor-announcments",
           icon: (
@@ -459,6 +526,7 @@ const SidebarDashboard = () => {
         {
           name: "Logout",
           path: "#",
+          onClick: handleLogout,
           icon: (
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -676,6 +744,7 @@ const SidebarDashboard = () => {
         {
           name: "Logout",
           path: "#",
+          onClick: handleLogout,
           icon: (
             <svg
               xmlns="http://www.w3.org/2000/svg"

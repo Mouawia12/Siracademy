@@ -2,14 +2,23 @@
 import Image from "next/image";
 import PopupVideo from "../popup/PopupVideo";
 import blogImage7 from "@/assets/images/blog/blog_7.png";
-import { useCartContext } from "@/contexts/CartContext";
-import getAllCourses from "@/libs/getAllCourses";
+import Link from "next/link";
+import { getStoredUser, isActiveMember, isLoggedIn } from "@/libs/auth";
 
 const CourseEnroll = ({ type, course }) => {
-  const courses = getAllCourses();
-  const { title: demoTitle, price: demoPrice, image: demoImage } = courses[0];
-  const { addProductToCart } = useCartContext();
-  const { id, image, price, title } = course || {};
+  const storedUser = getStoredUser();
+  const loggedIn = isLoggedIn();
+  const hasMembership = isActiveMember(storedUser);
+  const lessonCount = course?.lessons_count ?? course?.lessons?.length ?? 0;
+  const durationMinutes = course?.total_duration_minutes ?? 0;
+  const hours = Math.floor(durationMinutes / 60);
+  const minutes = durationMinutes % 60;
+  const durationLabel =
+    durationMinutes > 0
+      ? `${hours ? `${hours}h ` : ""}${minutes}m`
+      : "Self paced";
+  const thumbnail = course?.thumbnail_path || "";
+  const firstLessonId = course?.lessons?.[0]?.id;
   return (
     <div
       className="py-33px px-25px shadow-event mb-30px bg-whiteColor dark:bg-whiteColor-dark rounded-md"
@@ -19,7 +28,11 @@ const CourseEnroll = ({ type, course }) => {
         ""
       ) : (
         <div className="overflow-hidden relative mb-5">
-          <Image src={image || blogImage7} alt="" className="w-full" />
+          {thumbnail ? (
+            <img src={thumbnail} alt="" className="w-full" />
+          ) : (
+            <Image src={blogImage7} alt="" className="w-full" />
+          )}
           <div className="absolute top-0 right-0 left-0 bottom-0 flex items-center justify-center z-10">
             <PopupVideo />
           </div>
@@ -28,46 +41,47 @@ const CourseEnroll = ({ type, course }) => {
       {/* meeting thumbnail  */}
 
       <div
-        className={`flex justify-between  ${
+        className={`${
           type === 2 ? "mt-50px mb-5" : type === 3 ? "mb-50px" : "mb-5"
         }`}
       >
-        <div className="text-size-21 font-bold text-primaryColor font-inter leading-25px">
-          ${price ? price.toFixed(2) : "32.00"}{" "}
-          <del className="text-sm text-lightGrey4 font-semibold">/ $67.00</del>
-        </div>
-        <div>
-          <a
-            href="#"
-            className="uppercase text-sm font-semibold text-secondaryColor2 leading-27px px-2 bg-whitegrey1 dark:bg-whitegrey1-dark"
-          >
-            68% OFF
-          </a>
+        <div className="text-sm font-semibold text-secondaryColor3">
+          Included with Academy Membership
         </div>
       </div>
       <div className="mb-5" data-aos="fade-up">
-        <button
-          onClick={() =>
-            addProductToCart({
-              id: id || 1,
-              title: title || demoTitle,
-              price: price || demoPrice,
-              quantity: 1,
-              image: image || demoImage,
-              isCourse: true,
-            })
-          }
-          className="w-full text-size-15 text-whiteColor bg-primaryColor px-25px py-10px border mb-10px leading-1.8 border-primaryColor hover:text-primaryColor hover:bg-whiteColor inline-block rounded group dark:hover:text-whiteColor dark:hover:bg-whiteColor-dark"
-        >
-          Add To Cart
-        </button>
-        <button className="w-full text-size-15 text-whiteColor bg-secondaryColor px-25px py-10px mb-10px leading-1.8 border border-secondaryColor hover:text-secondaryColor hover:bg-whiteColor inline-block rounded group dark:hover:text-secondaryColor dark:hover:bg-whiteColor-dark">
-          Buy Now
-        </button>
-
-        <span className="text-size-13 text-contentColor dark:text-contentColor-dark leading-1.8">
-          <i className="icofont-ui-rotation"></i> 45-Days Money-Back Guarantee
-        </span>
+        {!loggedIn ? (
+          <div className="text-center">
+            <p className="text-sm text-contentColor dark:text-contentColor-dark mb-4">
+              This content is available for academy members only.
+            </p>
+            <Link
+              href="/login"
+              className="w-full text-size-15 text-whiteColor bg-primaryColor px-25px py-10px border mb-10px leading-1.8 border-primaryColor hover:text-primaryColor hover:bg-whiteColor inline-block rounded group dark:hover:text-whiteColor dark:hover:bg-whiteColor-dark"
+            >
+              Log in to Access
+            </Link>
+          </div>
+        ) : hasMembership ? (
+          <Link
+            href={firstLessonId ? `/lessons/${firstLessonId}` : "/courses"}
+            className="w-full text-size-15 text-whiteColor bg-primaryColor px-25px py-10px border mb-10px leading-1.8 border-primaryColor hover:text-primaryColor hover:bg-whiteColor inline-block rounded group dark:hover:text-whiteColor dark:hover:bg-whiteColor-dark text-center"
+          >
+            Access Course
+          </Link>
+        ) : (
+          <div className="text-center">
+            <p className="text-sm text-contentColor dark:text-contentColor-dark mb-4">
+              An active academy membership is required to view this content.
+            </p>
+            <Link
+              href="/contact"
+              className="w-full text-size-15 text-whiteColor bg-secondaryColor px-25px py-10px mb-10px leading-1.8 border border-secondaryColor hover:text-secondaryColor hover:bg-whiteColor inline-block rounded group dark:hover:text-secondaryColor dark:hover:bg-whiteColor-dark"
+            >
+              Contact Membership Team
+            </Link>
+          </div>
+        )}
       </div>
       <ul>
         <li className="flex items-center justify-between py-10px border-b border-borderColor dark:border-borderColor-dark">
@@ -75,7 +89,7 @@ const CourseEnroll = ({ type, course }) => {
             Instructor:
           </p>
           <p className="text-xs text-contentColor dark:text-contentColor-dark px-10px py-6px bg-borderColor dark:bg-borderColor-dark rounded-full leading-13px">
-            D. Willaim
+            {course?.primary_instructor?.name || "Sir Academy"}
           </p>
         </li>
         <li className="flex items-center justify-between py-10px border-b border-borderColor dark:border-borderColor-dark">
@@ -83,7 +97,13 @@ const CourseEnroll = ({ type, course }) => {
             Start Date
           </p>
           <p className="text-xs text-contentColor dark:text-contentColor-dark px-10px py-6px bg-borderColor dark:bg-borderColor-dark rounded-full leading-13px">
-            05 Dec 2024
+            {course?.published_at
+              ? new Date(course.published_at).toLocaleDateString("en-GB", {
+                  day: "2-digit",
+                  month: "short",
+                  year: "numeric",
+                })
+              : "TBD"}
           </p>
         </li>
         <li className="flex items-center justify-between py-10px border-b border-borderColor dark:border-borderColor-dark">
@@ -91,7 +111,7 @@ const CourseEnroll = ({ type, course }) => {
             Total Duration
           </p>
           <p className="text-xs text-contentColor dark:text-contentColor-dark px-10px py-6px bg-borderColor dark:bg-borderColor-dark rounded-full leading-13px">
-            08Hrs 32Min
+            {durationLabel}
           </p>
         </li>
         <li className="flex items-center justify-between py-10px border-b border-borderColor dark:border-borderColor-dark">
@@ -99,7 +119,7 @@ const CourseEnroll = ({ type, course }) => {
             Enrolled
           </p>
           <p className="text-xs text-contentColor dark:text-contentColor-dark px-10px py-6px bg-borderColor dark:bg-borderColor-dark rounded-full leading-13px">
-            100
+            {course?.enrollment_count ?? 0}
           </p>
         </li>
         <li className="flex items-center justify-between py-10px border-b border-borderColor dark:border-borderColor-dark">
@@ -107,7 +127,7 @@ const CourseEnroll = ({ type, course }) => {
             Lectures
           </p>
           <p className="text-xs text-contentColor dark:text-contentColor-dark px-10px py-6px bg-borderColor dark:bg-borderColor-dark rounded-full leading-13px">
-            30
+            {lessonCount}
           </p>
         </li>
         <li className="flex items-center justify-between py-10px border-b border-borderColor dark:border-borderColor-dark">
@@ -115,7 +135,7 @@ const CourseEnroll = ({ type, course }) => {
             Skill Level
           </p>
           <p className="text-xs text-contentColor dark:text-contentColor-dark px-10px py-6px bg-borderColor dark:bg-borderColor-dark rounded-full leading-13px">
-            Basic
+            {course?.level?.name || "All Levels"}
           </p>
         </li>
         <li className="flex items-center justify-between py-10px border-b border-borderColor dark:border-borderColor-dark">
@@ -123,7 +143,7 @@ const CourseEnroll = ({ type, course }) => {
             Language
           </p>
           <p className="text-xs text-contentColor dark:text-contentColor-dark px-10px py-6px bg-borderColor dark:bg-borderColor-dark rounded-full leading-13px">
-            Spanish
+            {course?.language || "en"}
           </p>
         </li>
         <li className="flex items-center justify-between py-10px border-b border-borderColor dark:border-borderColor-dark">
@@ -131,7 +151,7 @@ const CourseEnroll = ({ type, course }) => {
             Quiz
           </p>
           <p className="text-xs text-contentColor dark:text-contentColor-dark px-10px py-6px bg-borderColor dark:bg-borderColor-dark rounded-full leading-13px">
-            Yes
+            {course?.quiz_enabled ? "Yes" : "No"}
           </p>
         </li>
         <li className="flex items-center justify-between py-10px border-b border-borderColor dark:border-borderColor-dark">
@@ -139,7 +159,7 @@ const CourseEnroll = ({ type, course }) => {
             Certificate
           </p>
           <p className="text-xs text-contentColor dark:text-contentColor-dark px-10px py-6px bg-borderColor dark:bg-borderColor-dark rounded-full leading-13px">
-            Yes
+            {course?.certificate_enabled ? "Yes" : "No"}
           </p>
         </li>
       </ul>

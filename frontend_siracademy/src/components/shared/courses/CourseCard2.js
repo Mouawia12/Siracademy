@@ -174,19 +174,9 @@ const CourseCard2 = ({ course, card, isList, isNotSidebar }) => {
                   {title}
                 </Link>
               </h4>
-              {/*  price */}
-              <div className="text-lg font-medium text-black-brerry-light mb-4">
-                ${price.toFixed(2)}
-                <del className="text-sm text-lightGrey4 font-semibold">
-                  / $67.00
-                </del>
-                <span
-                  className={`ml-6 text-base font-semibold ${
-                    isFree ? " text-greencolor" : " text-secondaryColor3"
-                  }`}
-                >
-                  {isFree ? "Free" : <del>Free</del>}
-                </span>
+              {/*  membership */}
+              <div className="text-sm font-medium text-secondaryColor3 mb-4">
+                Included with Academy Membership
               </div>
               {/*  bottom */}
               <div className="flex flex-wrap justify-between sm:flex-nowrap items-center gap-y-2 pt-15px border-t border-borderColor">

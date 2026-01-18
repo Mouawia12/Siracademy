@@ -170,19 +170,9 @@ const CourseCard = ({ course, type }) => {
                 {title}
               </Link>
             </h5>
-            {/* price */}
-            <div className="text-lg font-semibold text-primaryColor  mb-4">
-              ${price.toFixed(2)}
-              <del className="text-sm text-lightGrey4 font-semibold ml-1">
-                / $67.00
-              </del>
-              <span
-                className={`ml-6 text-base font-semibold ${
-                  isFree ? " text-greencolor" : " text-secondaryColor3"
-                }`}
-              >
-                {isFree ? "Free" : <del>Free</del>}
-              </span>
+            {/* membership */}
+            <div className="text-sm font-semibold text-secondaryColor3 mb-4">
+              Included with Academy Membership
             </div>
             {/* author and rating--> */}
             <div className="grid grid-cols-1 md:grid-cols-2 pt-15px border-t border-borderColor">

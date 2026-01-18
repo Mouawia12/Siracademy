@@ -9,7 +9,7 @@ import CourseTabButton from "../buttons/CourseTabButton";
 import TabContentWrapper from "../wrappers/TabContentWrapper";
 import { useEffect } from "react";
 
-const CourseDetailsTab = ({ type, id }) => {
+const CourseDetailsTab = ({ type, course, lessons }) => {
   const { currentIdx, setCurrentIdx, handleTabClick } = useTab();
   const tabButtons = [
     {
@@ -18,7 +18,7 @@ const CourseDetailsTab = ({ type, id }) => {
           <i className="icofont-book-alt mr-2"></i> Curriculum
         </>
       ),
-      content: <CurriculumContent />,
+      content: <CurriculumContent lessons={lessons} />,
     },
     {
       name: (
@@ -27,7 +27,7 @@ const CourseDetailsTab = ({ type, id }) => {
           <i className="icofont-paper mr-2"></i> Description
         </>
       ),
-      content: <DescriptoinContent />,
+      content: <DescriptoinContent course={course} />,
     },
     {
       name: (
@@ -43,7 +43,7 @@ const CourseDetailsTab = ({ type, id }) => {
           <i className="icofont-teacher mr-2"></i> Instructor
         </>
       ),
-      content: <InstructorContent id={id} />,
+      content: <InstructorContent instructor={course?.primary_instructor} />,
     },
   ];
   useEffect(() => {
@@ -53,7 +53,7 @@ const CourseDetailsTab = ({ type, id }) => {
     if (type === 3) {
       setCurrentIdx(2);
     }
-  }, [, type, setCurrentIdx]);
+  }, [type, setCurrentIdx]);
   return (
     <div data-aos="fade-up" className="tab course-details-tab">
       <div className="tab-links flex flex-wrap md:flex-nowrap mb-30px rounded gap-0.5">
